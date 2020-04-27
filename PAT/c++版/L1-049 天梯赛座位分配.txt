@@ -1,0 +1,49 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	int *p = new int[n];
+	for (int i = 1; i <= n; i++) {
+		cin >> p[i];
+	}
+	int id[10001] = { 0 };
+	int cnt = 1;
+	vector<vector<int>> pt(n + 1);
+	while (true) {
+		bool sign = true;
+		for (int i = 1; i <= n; i++) {
+			if (pt[i].size() < p[i]*10) {
+				if (id[cnt - 1] != i) {
+					id[cnt] = i;
+					pt[i].push_back(cnt);
+					cnt++;
+				}
+				else {
+					id[cnt + 1] = i;
+					pt[i].push_back(cnt+1);
+					cnt = cnt+ 2;
+				}
+				sign = false;
+			}
+		}
+		if (sign) {
+			break;
+		}
+	}
+	for (int i = 1; i <= n; i++) {
+		cout << "#" << i << endl;
+		for (int j = 0; j <pt[i].size(); j++) {
+			cout << pt[i][j];
+			if ((j + 1) % 10 == 0)
+				cout << endl;
+			else
+				cout << " ";
+		}
+	}
+	system("pause");
+	return 0;
+
+}

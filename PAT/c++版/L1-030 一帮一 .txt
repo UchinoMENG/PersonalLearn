@@ -1,0 +1,42 @@
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+struct peo {
+	string name;
+	int node;
+};
+int main() {
+	vector<peo> p;
+	peo person;
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> person.node;
+		cin >> person.name;
+		p.push_back(person);
+	}
+	int temp = n - 1;
+	int nice = n - 1;
+	for (int i = 0; i < n / 2; i++) {
+		int sign = p[i].node;
+		if (sign == 1) {
+			while (p[temp].node == sign) {
+				temp--;
+			}
+			cout << p[i].name << " " << p[temp].name;	
+			temp--;
+		}
+		if (sign == 0) {
+			while (p[nice].node == sign) {
+				nice--;
+			}
+			cout << p[i].name << " " << p[nice].name;
+			nice--;
+		}
+		if (i != n - 1)
+			cout << endl;
+	}
+	system("pause");
+	return 0;
+}

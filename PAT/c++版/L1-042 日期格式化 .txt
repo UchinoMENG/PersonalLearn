@@ -1,0 +1,13 @@
+#include<iostream>
+using namespace std;
+
+int main() {
+
+	int day;
+	int month;
+	int year;
+	scanf_s("%02d-%02d-%04d", &month, &day, &year);
+	printf("%04d-%02d-%02d", year, month, day);
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,113 @@
+//HDU1010
+#include<vector>
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+#include<queue>
+#define MAXN 8
+using namespace std;
+struct zuo {
+	int x, y, cnt;
+};
+int dir[4][2] = { {1,0},{0,1},{0,-1},{-1,0} };
+char vv[MAXN][MAXN];
+//bool visit[MAXN][MAXN];
+int a, b, c;
+int ret = 0;
+bool judge(int x, int y) {
+	if (x < 0 || y < 0 || x >= a || y >= b)
+		return false;
+	if (vv[x][y] == '.' || vv[x][y] == 'D')
+		return true;
+	return false;
+}
+bool dfs(int st, int end, int cnt) {
+	if (cnt > c) {
+		return false;
+	}
+	if (ret == 1)
+		return true;
+	int xx = st, yy = end,x,y;
+	for (int i = 0; i < 4; i++) {
+		x = xx + dir[i][0], y = yy + dir[i][1];
+		if (judge(x, y)) {
+			if (vv[x][y] == 'D') {
+				if (cnt+1 == c) {
+					ret = 1;
+					return true;
+				}
+			}
+			else if (vv[x][y] == '.') {
+				vv[x][y] = 'X';
+				dfs(x, y, cnt + 1);
+				if (ret == 1)
+					return true;
+				vv[x][y] = '.';
+			}
+		}
+	}
+	return false;
+}
+//bool bfs(queue<zuo> kk) {
+//	zuo jj;
+//	int xx, yy;
+//	int sign = 0;
+//	while (!kk.empty()) {
+//		jj = kk.front();
+//		kk.pop();
+//		sign = jj.cnt;
+//		if (sign >= c)
+//			return false;
+//		for (int i = 0; i < 4; i++) {
+//			xx = jj.x + dir[i][0], yy = jj.y + dir[i][1];
+//			if (judge(xx, yy)) {
+//				if (vv[xx][yy] == '.') {
+//					vv[xx][yy] = 'X';
+//					kk.push({ xx,yy,sign + 1 });
+//				}
+//				if (vv[xx][yy] == 'D') {
+//					return true;
+//				}
+//			}
+//		}
+//
+//
+//	}
+//	return false;
+//}
+int main() {
+	cin >> a >> b >> c;
+	zuo sign,uu;
+	while (a != 0 && b != 0 && c != 0) {
+		queue<zuo> kk;
+		ret = 0;
+		fill(vv[0], vv[0] + MAXN * MAXN, 0);
+		for (int i = 0; i < a; i++) {
+			for (int j = 0; j < b; j++) {
+				cin >> vv[i][j];
+				if (vv[i][j] == 'S') {
+					sign.x = i;
+					sign.y = j;
+					sign.cnt = 0;
+				}
+				else if (vv[i][j] == 'D') {
+					uu.x = i;
+					uu.y = j;
+				}
+			}
+		}
+		kk.push(sign);
+		if (abs(uu.x - sign.x) + abs(uu.y - sign.y) > c)
+			cout << "NO" << endl;
+		else if((abs(uu.x - sign.x) + abs(uu.y - sign.y)+c)%2==1)
+			cout << "NO" << endl;
+		else if (dfs(sign.x,sign.y,0)) {
+			cout << "YES" << endl;
+		}
+		else
+			cout << "NO" << endl;
+		cin >> a >> b >> c;
+
+	}
+	system("pause");
+}

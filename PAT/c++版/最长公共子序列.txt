@@ -1,0 +1,56 @@
+#include<iostream>
+#include<stack>
+#include<algorithm>
+#define MAXN 100
+using namespace std;
+char p1[MAXN] = "BDCABA";
+char p2[MAXN] = "ABCBDAB";
+int c[MAXN][MAXN];
+stack<char> ans;		//定义一个栈用于记录数据
+void LCS(char *p1, char *p2, int m, int n) {
+	for (int i = 0; i <= m; i++) {
+		c[i][0] = 0;
+	}
+	for (int j = 0; j <= n; j++)
+		c[0][j] = 0;
+	for (int i = 1; i <= m; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (p1[i-1] == p2[j-1]) 
+				c[i][j] = c[i - 1][j - 1] + 1;
+			else
+				c[i][j] = max(c[i - 1][j], c[i][j - 1]);
+
+		}
+	}
+}
+void print(int i,int j) {
+	while (c[i][j]) {
+		if (c[i][j] == c[i - 1][j])
+			i--;
+		else if (c[i][j] == c[i][j - 1])
+			j--;
+		else if (c[i][j] == c[i - 1][j - 1] + 1) {
+			i--; j--;
+			ans.push(p1[i]);
+		}
+	}
+}
+int main() {
+	cout << "序列1：BDCABA" << endl;
+	cout << "序列2：ABCBDAB" << endl;
+	int len1 = strlen(p1);
+	int len2 = strlen(p2);
+	LCS(p1, p2, len1, len2);
+	for (int i = 0; i <= len1; i++) {
+		for (int j = 0; j <= len2; j++)
+			cout << c[i][j] << " ";
+		cout << endl;
+	}
+	print(len1, len2);
+	cout << "最长子序列之一是:" << endl;
+	while (!ans.empty()) {
+		cout << ans.top() << " ";
+		ans.pop();
+	}
+	system("pause");
+}

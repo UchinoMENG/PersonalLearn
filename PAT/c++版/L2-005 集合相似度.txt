@@ -1,0 +1,35 @@
+#include<iostream>
+#include<set>
+#include<algorithm>
+#define MAX 51
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	set<int> num[MAX];
+	int temp;
+	for (int i = 1; i <= n; i++) {
+		cin >> temp;
+		for (int j = 0; j < temp; j++) {
+			int kk;
+			cin >> kk;
+			num[i].insert(kk);
+		}
+	}
+	int n2;
+	cin >> n2;
+	int one, two;
+	for (int i = 0; i < n2; i++) {
+		cin >> one >> two;
+		int cnt = 0;
+		for (auto it = num[one].begin(); it != num[one].end(); it++) {
+			if (num[two].find(*it)!=num[two].end()) {
+				cnt++;
+			}
+		}
+		printf("%.2f%%\n", cnt*100.0 / (num[one].size() + num[two].size()-cnt));
+	}
+	system("pause");
+	return 0;
+}

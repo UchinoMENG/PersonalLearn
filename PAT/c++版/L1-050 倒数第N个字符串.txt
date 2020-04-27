@@ -1,0 +1,31 @@
+#include<iostream>
+#include<string>
+#include<cmath>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	int num;
+	cin >> num;
+	num--;
+	string str(n, 'z');
+	int s = pow(26, n);
+	if (num == s) {
+		cout << string(n, 'a');
+		return 0;
+	}
+	int alp = num % 26;
+	num /= 26;
+	str[n - 1] = 'z' - alp;
+	for (int i = n - 2; i >= 0; i--) {
+		alp = num % 26;
+		num /= 26;
+		str[i] = 'z' - alp;
+		if (num == 0)
+			break;
+	}
+	cout << str << endl;
+	system("pause");
+	return 0;
+}

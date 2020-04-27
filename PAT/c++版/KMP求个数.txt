@@ -1,0 +1,46 @@
+#include<iostream>
+#include<string>
+using namespace std;
+string str1, str2;
+int next1[100000];
+void getNext() {
+	int i = 0, j = -1;
+	next1[0] = -1;
+	while (str2[i]) {
+		if (j == -1 || str2[i] == str2[j]) {
+			i++; j++;
+			next1[i] = j;
+		}
+		else
+			j = next1[j];
+	}
+}
+int KMP() {
+	int ans = 0;
+	int i = 0, j = 0;
+	while (j < str2.length()&&i<str1.length()) {
+		if (j == -1 || str1[i] == str2[j]) {
+			i++; j++;
+			if (j >= str2.length()) {
+				ans++;
+				j = next1[j];
+			}
+		}
+		else {
+			j = next1[j];
+		}
+	}
+	return ans;
+	/*if (j == str2.length())
+		return i - j;
+	else
+		return -1;*/
+}
+int main() {
+	str1 = "ababababcaababcaababc";
+	str2 = "ababc";
+	getNext();
+	int index = KMP();
+	cout << "index = " << index << endl;
+	system("pause");
+}

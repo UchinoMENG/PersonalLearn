@@ -1,0 +1,31 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+	int max_drink1, max_drink2;
+	cin >> max_drink1 >> max_drink2;
+	int num;
+	cin >> num;
+	int a, a1, b, b1;
+	int count1 = 0, count2 = 0;
+	for (int i = 0; i < num; i++) {
+		cin >> a >> a1 >> b >> b1;
+		if (a + b == a1 && a + b != b1)
+			count1++;
+		else if (a + b != a1 && a + b == b1)
+			count2++;
+		if (count1 > max_drink1) {
+			cout << "A" << endl;
+			cout << count2;
+			break;
+		}
+		else if (count2 > max_drink2) {
+			cout << "B" << endl;
+			cout << count1;
+			break;
+		}
+	}
+	system("pause");
+	return 0;
+}

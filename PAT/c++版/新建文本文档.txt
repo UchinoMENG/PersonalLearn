@@ -1,0 +1,18 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+	string str1, str2, s;
+	getline(cin, str1);
+	getline(cin, str2);
+	s = str1 + str2;
+	int hash[200] = { 0 };
+	for (int i = 0; i < s.size(); i++) {
+		if (hash[s[i]] == 0)
+			cout << s[i];
+		hash[s[i]] = 1;
+	}
+	system("pause");
+	return 0;
+}

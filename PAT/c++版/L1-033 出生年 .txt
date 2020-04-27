@@ -1,0 +1,32 @@
+#include<iostream>
+#include<string>
+#include<set>
+using namespace std;
+
+int main() {
+	string year;
+	cin >> year;
+	int n;
+	cin >> n;
+	if (year.size() < 4) {
+		year.insert(0, 4 - year.size(), '0');
+	}
+	set<char> ss;
+	int i;
+	for (i = 0; ; i++) {
+		ss.clear();
+		for (int j = 0; j < 4; j++) {
+			ss.insert(year[j]);
+		}
+		if (ss.size() == n)
+			break;
+		else
+			year = to_string(stoi(year, 0, 10) + 1);
+		if (year.size() < 4) {
+			year.insert(0, 4 - year.size(), '0');
+		}
+	}
+	cout << i << " " << year << endl;
+	system("pause");
+	return 0;
+}

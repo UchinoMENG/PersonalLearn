@@ -1,0 +1,41 @@
+#include<iostream>
+#include<string>
+#include<cctype>
+using namespace std;
+
+int main() {
+
+	int num;
+	int ret = 0;
+	cin >> num;
+	string ID;
+	int sign = 0;
+	int j;
+	int a[] = { 7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2 };
+	string check = "10X98765432";
+	for (int i = 0; i < num; i++) {
+		int sum = 0;
+		ret = 0;
+		cin >> ID;
+		for (j = 0; j < ID.size()-1; j++) {
+			if (isdigit(ID[j]))
+				sum = sum + (ID[j] - '0')*a[j];
+			else {
+				cout << ID<<endl;
+				ret = 1;
+				break;
+			}
+		}
+		if (ID[j] == check[sum % 11]) {
+			sign++;
+		}
+		else if(ret==0) {
+			cout << ID << endl;
+		}
+	}
+	if (sign == num) {
+		cout << "All passed";
+	}
+	system("pause");
+	return 0;
+}

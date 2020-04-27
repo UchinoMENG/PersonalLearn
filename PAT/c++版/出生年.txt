@@ -1,0 +1,39 @@
+#include<iostream>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+int main() {
+	int year;
+	int num;
+	cin >> year >> num;
+	int year2 = year;
+	int unsame=-1;
+	while (unsame != num) {
+		unsame = 0;
+		string temp = to_string(year);
+		if (temp.size() != 4) {
+			temp.insert(0, 4 - temp.size(), '0');
+		}
+		for (int i = 0; i < temp.size(); i++) {
+			for (int j = i + 1; j < temp.size(); j++) {
+				if(temp[j]==temp[i]){
+					temp.erase(temp.begin() + j);
+					j--;
+				}
+			}
+			unsame++;
+		}
+		year++;
+	}
+	cout << year - year2 - 1<<" ";
+	string kk = to_string(year-1);
+	if (kk.size() == 4)
+		cout << kk;
+	else {
+		kk.insert(0, 4 - kk.size(), '0');
+		cout << kk << endl;
+	}
+	system("pause");
+	return 0;
+}

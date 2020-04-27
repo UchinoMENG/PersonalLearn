@@ -1,0 +1,27 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	getchar();
+	string str1;
+	getline(cin, str1);
+	string *p = new string[n];
+	for (int i = 0; i < str1.size(); i++) {
+		p[i % n].push_back(str1[i]);
+	}
+	int surplus = str1.size() - 1;
+	while (surplus % n != n-1) {
+		p[(surplus + 1) % n].push_back(' ');
+		surplus++;
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = p[i].size() - 1; j >= 0; j--)
+			cout << p[i][j];
+		cout << endl;
+	}
+	system("pause");
+	return 0;
+}

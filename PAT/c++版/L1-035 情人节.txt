@@ -1,0 +1,24 @@
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+int main() {
+	string name;
+	vector<string> cc;
+	while (cin >> name) {
+		if (name == ".")
+			break;
+		else
+			cc.push_back(name);
+	}
+	if (cc.size() < 2)
+		cout << "Momo... No one is for you ..." << endl;
+	else if (cc.size() < 14) {
+		cout << cc[1] << " is the only one for you..." << endl;
+	}
+	else
+		cout << cc[1] << " and " << cc[13] << " are inviting you to dinner..." << endl;
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,99 @@
+//BFS算法求解
+#include<iostream>
+#include<queue>
+#include<vector>
+#include<algorithm>
+using namespace std;
+#define MAX 40
+struct tree {
+	int l, r;
+};
+int in[MAX], post[MAX];
+tree Tree[MAX];
+vector<int> pre;
+int pre_visit(int root, int first, int end) {
+	int i = first;
+	if (first > end)
+		return 0;
+	while (i < end&&post[root] != in[i])
+		i++;
+	int value = post[root];
+	Tree[value].l = pre_visit(root - (end - i + 1), first, i - 1);
+	Tree[value].r = pre_visit(root - 1, i + 1, end);
+	return value;
+}
+void bfs(int x) {
+	queue<int> temp;
+	temp.push(x);
+	int first;
+	while (!temp.empty()) {
+		first = temp.front();
+		temp.pop();
+		pre.push_back(first);
+		if (Tree[first].l != 0)
+			temp.push(Tree[first].l);
+		if (Tree[first].r != 0)
+			temp.push(Tree[first].r);
+	}
+	for (int i = 0; i < pre.size(); i++) {
+		if (i == 0)
+			cout << pre[i];
+		else
+			cout << " " << pre[i];
+	}
+}
+int main() {
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> post[i];
+	}
+	for (int i = 0; i < n; i++)
+		cin >> in[i];
+	pre_visit(n - 1, 0, n - 1);
+	int head = post[n - 1];
+	bfs(head);
+	system("pause");
+	return 0;
+}
+/*直接求解法
+#include<iostream>
+#include<vector>
+using namespace std;
+vector<int> in, post, c(100000, -1);
+void pre_visit(int root, int start, int end, int index) {
+	if (start > end)
+		return;
+	int i = start;
+	c[index] = post[root];
+	while (i < end&&post[root] != in[i])
+		i++;
+	pre_visit(root - (end - i + 1), start, i - 1, 2 * index + 1);
+	pre_visit(root - 1, i + 1, end, 2 * index + 2);
+}
+int main() {
+	int n;
+	scanf("%d", &n);
+	in.resize(n);
+	post.resize(n);
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &post[i]);
+	}
+	for (int i = 0; i < n; i++) {
+		scanf("%d", &in[i]);
+	}
+	pre_visit(n - 1, 0, n - 1, 0);
+	int cnt = 0;
+	for (int i = 0; i < c.size(); i++) {
+		if (cnt != n - 1 && c[i] != -1) {
+			printf("%d ", c[i]);
+			cnt++;
+		}
+		else if (c[i] != -1) {
+			printf("%d", c[i]);
+			break;
+		}
+	}
+	system("pause");
+	return 0;
+}*/

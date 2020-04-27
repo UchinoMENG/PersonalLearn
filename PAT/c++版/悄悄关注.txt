@@ -1,0 +1,91 @@
+//AC代码
+#include<iostream>
+#include<string>
+#include<set>
+#include<map>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+	string temp;
+	set<string> name;
+	for (int i = 0; i < n; i++) {
+		cin >> temp;
+		name.insert(temp);
+	}
+	int num;
+	cin >> num;
+	getchar();
+	map<string, int> people;
+	int sum = 0;
+	int cnt;
+	for (int i = 0; i < num; i++) {
+		cin >> temp;
+		cin >> cnt;
+		people[temp] = cnt;
+		sum += cnt;
+	}
+	int flag = 0;
+	for (auto it : people) {
+		if (name.find(it.first) == name.end() && (it.second > sum*1.0 / num)) {
+			cout << it.first << endl;
+			flag = 1;
+		}
+	}
+	if (flag == 0)
+		cout << "Bing Mei You" << endl;
+	system("pause");
+	return 0;
+}
+//下一个是超时代码，我也不知道为啥
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+
+
+struct inf {
+	string name;
+	int num;
+};
+int cmp(inf aa, inf bb) {
+	return aa.name < bb.name;
+};
+int main() {
+	int num;
+	cin >> num;
+	int sum = 0;
+	vector<string> peo(num);
+	for (int i = 0; i < num; i++) {
+		string temp;
+		cin >> temp;
+		peo[i] = temp;
+	}
+	int n;
+	cin >> n;
+	vector<inf> kk(n);
+	for (int i = 0; i < n; i++) {
+		inf cc;
+		cin >> cc.name >> cc.num;
+		sum += cc.num;
+		kk[i] = cc;
+	}
+	sort(kk.begin(), kk.end(), cmp);
+	int sign = 0;
+	for (int i = 0; i < n; i++) {
+		if (find(peo.begin(), peo.end(), kk[i].name) == peo.end()) {
+			if (kk[i].num > sum*1.0 / n) {
+				cout << kk[i].name << endl;
+				sign = 1;
+			}
+		}
+
+	}
+	if (sign == 0)
+		cout << "Bing Mei You" << endl;
+	system("pause");
+	return 0;
+
+}

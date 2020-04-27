@@ -1,0 +1,23 @@
+#include<vector>
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main() {
+	vector<string> peo;
+	string temp;
+	do {
+		cin >> temp;
+		peo.push_back(temp);
+	} while (temp != ".");
+	peo.erase(peo.end() - 1);
+	if (peo.size() >= 14) {
+		cout << peo[1] << " and " << peo[13] << " are inviting you to dinner..." << endl;
+	}
+	else if (peo.size() < 2)
+		cout << "Momo... No one is for you ..." << endl;
+	else
+		cout << peo[1] << " is the only one for you..." << endl;
+	system("pause");
+	return 0;
+}

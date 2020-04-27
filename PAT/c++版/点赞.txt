@@ -1,0 +1,38 @@
+#include<set>
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main() {
+	vector<int> kk;
+	set<int> hh;
+	int num;
+	cin >> num;
+	for (int i = 0; i < num; i++) {
+		int n;
+		cin >> n;
+		for (int j = 0; j < n; j++) {
+			int temp;
+			cin >> temp;
+			kk.push_back(temp);
+			hh.insert(temp);
+		}
+	}
+	int max_num=0;
+	int max;
+	for (auto it = hh.begin(); it != hh.end(); it++) {
+		int nn = count(kk.begin(), kk.end(), *it);
+		if (nn > max_num) {
+			max = *it;
+			max_num = nn;
+		}
+		else if (nn == max_num) {
+			if (*it > max)
+				max = *it;
+		}
+	}
+	cout << max << " " << max_num << endl;
+	system("pause");
+	return 0;
+}
