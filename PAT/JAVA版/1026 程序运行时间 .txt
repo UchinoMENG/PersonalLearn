@@ -1,0 +1,13 @@
+import java.util.*;
+import java.lang.Math;
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int a1 = in.nextInt();
+		int b1 = in.nextInt();
+		int cha = (int) (Math.round((b1-a1)*1.0/100));
+		System.out.printf("%02d:%02d:%02d",cha/3600,cha/60%60,cha%60);
+		
+	}
+}

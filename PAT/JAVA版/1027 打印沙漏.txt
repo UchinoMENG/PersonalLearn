@@ -1,0 +1,43 @@
+
+import java.util.*;
+public class Main {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		String chr = in.next();
+		int base = 1;
+		int sum1 = 1;
+		while(num>=sum1) {
+			sum1+=(2*(2*base+1));
+			base++;
+		}
+		base--;
+		sum1-=(2*(2*base+1));
+		base--;
+		int result = num-sum1;
+		int cha = base;
+		while(base>0) {
+			for(int i = 0;i<cha-base;i++)
+				System.out.print(" ");
+			for(int i = 0;i<2*base+1;i++)
+				System.out.print(chr);
+			System.out.println();
+			base--;
+		}
+		for(int i = 0;i<cha-base;i++)
+			System.out.print(" ");
+		System.out.println(chr);
+		while(base<cha) {
+			base++;
+			for(int i = 0;i<cha-base;i++)
+				System.out.print(" ");
+			for(int i = 0;i<2*base+1;i++)
+				System.out.print(chr);
+			System.out.println();
+		}
+		if(num==1)
+			System.out.println(0);
+		if(result!=0)
+			System.out.println(result);
+	}	
+}

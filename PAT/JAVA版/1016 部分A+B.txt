@@ -1,0 +1,27 @@
+import java.util.*;
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		String num1 = in.next();
+		int sign1 = in.nextInt();
+		String num2 = in.next();
+		int sign2 = in.nextInt();
+		long n1=0,n2 = 0;
+		for(int i = 0;i<num1.length();i++) {
+			if(num1.charAt(i)-48==sign1) {
+				n1*=10;
+				n1+=num1.charAt(i)-48;
+			}
+		}
+		for(int i = 0;i<num2.length();i++) {
+			if(num2.charAt(i)-48==sign2) {
+				n2*=10;
+				n2+=num2.charAt(i)-48;
+			}
+		}
+		System.out.println(n1+n2);
+	}
+
+}

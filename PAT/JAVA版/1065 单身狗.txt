@@ -1,0 +1,51 @@
+//太真实的JAVA超时代码
+
+import java.math.BigInteger;
+import java.util.*;
+public class Main {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num1 = in.nextInt();
+		HashMap<Integer,Integer> peo = new HashMap<>();
+		int cp1 = -1,cp2 = -1;
+		for(int i = 0;i<num1;i++) {
+			cp1=in.nextInt();
+			cp2 = in.nextInt();
+			peo.put(cp1, cp2);
+			peo.put(cp2,cp1);
+		}
+		int num2 = in.nextInt();
+		int []visited = new int[num2];
+		Arrays.fill(visited, 0);
+		TreeSet<Integer> single = new TreeSet<>();
+		int one = -1;
+		for(int i = 0;i<num2;i++) {
+			one = in.nextInt();
+			single.add(one);
+		}
+		int cnt = num2;
+		Iterator<Integer> it = single.iterator();
+		for(int i = 0;i<num2;i++) {
+			int gg = it.next();
+			if(visited[i]==1)
+				continue;
+			if(single.contains(peo.getOrDefault(gg, -1))) {
+				visited[i] = 1;
+				cnt--;
+			}
+		}
+		System.out.println(cnt);
+		it = single.iterator();
+		int sign = 0;
+		for(int i = 0;i<num2;i++) {
+			int temp = it.next();
+			if(visited[i]==1) {
+				continue;
+			}
+			if(sign==1)
+				System.out.print(" ");
+			sign = 1;
+			System.out.print(temp);
+		}
+	}	
+}

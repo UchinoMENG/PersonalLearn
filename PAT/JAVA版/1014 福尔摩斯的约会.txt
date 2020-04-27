@@ -1,0 +1,52 @@
+import java.text.DecimalFormat;
+import java.util.*;
+public class Main {
+	public static boolean Prime(int num) {
+		for(int i = 2;i<=Math.sqrt(num);i++)
+			if(num%i==0)
+				return false;
+		return true;
+	}
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		String[] str = new String[4];
+		for(int i = 0;i<4;i++)
+			str[i] = in.next();
+		String day = new String();
+		int sign = 0;
+		for(int i = 0;i<str[0].length();i++) {
+			char s = str[0].charAt(i);
+			if(str[0].charAt(i)==str[1].charAt(i)&&s>='A'&&s<='G'&&sign==0) {
+				sign++;
+				switch(s) {
+				case 'A':day="MON ";break;
+				case 'B':day="TUE ";break;
+				case 'C':day="WED ";break;
+				case 'D':day="THU ";break;
+				case 'E':day="FRI ";break;
+				case 'F':day="SAT ";break;
+				case 'G':day="SUN ";break;
+				}
+				System.out.print(day);
+			}
+			else if(str[0].charAt(i)==str[1].charAt(i)&&(Character.isDigit(s)||(s>='A'&&s<='N'))&&sign==1) {
+				if(Character.isDigit(s)) {
+					System.out.print("0"+s);
+				}
+				else {
+					System.out.print(10+s-'A');
+				}
+				break;
+			}
+		}
+		for(int i = 0;i<str[3].length();i++) {
+			char s = str[3].charAt(i);
+			if(str[3].charAt(i)==str[2].charAt(i)&&((s>='a'&&s<='z')||(s>='A'&&s<='Z'))) {
+				System.out.printf(":%02d", i);
+				break;
+			}
+		}
+			
+	}
+	
+}

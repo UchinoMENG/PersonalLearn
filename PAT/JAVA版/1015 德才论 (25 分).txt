@@ -1,0 +1,82 @@
+//这道题我用JAVA没有AC,TL了。
+//在网上看了看其他的，用JAVAac的好像很少（反正我是没看到，换成TreeSet也超时）.
+import java.util.*;
+public class Main {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		int sign1 = in.nextInt();
+		int sign2 = in.nextInt();
+		Stu.sign1 = sign1;
+		Stu.sign2 = sign2;
+		Stu[] ss  = new Stu[num];
+		int id = 0,de = 0,cai = 0;
+		for(int i = 0;i<num;i++) {
+			id=in.nextInt();
+			de = in.nextInt();
+			cai = in.nextInt();
+			ss[i] = new Stu(id,de,cai);
+			if(Stu.cmp(ss[i])>1) {
+				Stu.cnt++;
+			}
+		}
+		Arrays.sort(ss);
+		System.out.println(Stu.cnt);
+		for(int i = 0;i<Stu.cnt;i++) {
+			System.out.println(ss[i]);
+		}
+	}
+	
+}
+class Stu implements Comparable<Stu>{
+	private int id;
+	private int de;
+	private int cai;
+	public static int sign1 = 0;
+	public static int sign2 = 0;
+	public static int cnt = 0;
+	public Stu(int id, int de, int cai) {
+		super();
+		this.id = id;
+		this.de = de;
+		this.cai = cai;
+	}
+	@Override
+	public String toString() {
+		return  id +" "+de+" "+cai;
+	}
+	public static int cmp(Stu e) {
+		if(e.de>=sign2&&e.cai>=sign2) {
+			return 4;
+		}
+		else if(e.de>=sign2&&e.cai>=sign1||((e.de>=sign1&&e.cai>=sign1&&e.de>e.cai))){
+			return 3;
+		}
+		else if(e.de>=sign1&&e.cai>=sign1) {
+			return 2;
+		}
+		return 1;
+	}
+	@Override
+	public int compareTo(Stu o) {
+		if(cmp(this)<cmp(o)) {
+			return 1;
+		}
+		else if(cmp(this)>cmp(o)) {
+			return -1;
+		}
+		else {
+			int sum1 = this.de+this.cai;
+			int sum2 = o.de+o.cai;
+			int cha = sum2-sum1;
+			if(cha!=0)
+				return cha;
+			else {
+				if(this.de!=o.de) {
+					return o.de-this.de;
+				}
+				return this.id-o.id;
+			}
+		}
+	}	
+}

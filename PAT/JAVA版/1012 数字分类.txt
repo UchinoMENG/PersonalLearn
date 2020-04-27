@@ -1,0 +1,52 @@
+import java.text.DecimalFormat;
+import java.util.*;
+public class Main {
+	public static boolean Prime(int num) {
+		for(int i = 2;i<=Math.sqrt(num);i++)
+			if(num%i==0)
+				return false;
+		return true;
+	}
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num1 = in.nextInt();
+		ArrayList<Integer>[] ss = new ArrayList[5];
+		for(int i = 0;i<5;i++) {
+			ss[i] = new ArrayList<>();
+		}
+		int temp = 0;
+		int sum1 = 0,sum2=0,sign = -1,cnt=0,cnt2 = 0,sum3=0,sum4 = 0,max = 0;
+		int ret = 0;
+		for(int i = 0;i<num1;i++) {
+			temp = in.nextInt();
+			if(temp%10==0) {
+				sum1+=temp;
+			}
+			else if(temp%5==1) {
+				ret = 1;
+				sign*=-1;
+				sum2+=(sign*temp);
+			}
+			else if(temp%5==2) {
+				cnt++;
+			}
+			else if(temp%5==3) {
+				cnt2++;
+				sum4+=temp;
+			}
+			else if(temp%5==4) {
+				if(max<temp)
+					max = temp;
+			}
+		}
+		
+		System.out.print((sum1>0?sum1:"N")+" "+(ret!=0?sum2:"N")+" "+(cnt>0?cnt:"N")+" ");
+		if(cnt2==0) {
+			System.out.print("N ");
+		}
+		else
+			System.out.printf("%.1f ",sum4*1.0/cnt2);
+		System.out.print((max>0?max:"N"));
+	}
+	
+}

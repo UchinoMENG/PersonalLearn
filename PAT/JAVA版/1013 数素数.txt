@@ -1,0 +1,56 @@
+import java.util.*;
+public class Main {
+	static ArrayList<Integer> ss = new ArrayList<>();
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num1 = in.nextInt();
+		int num2 = in.nextInt();
+		int size = 1;
+		Prime(num1,num2);
+		for(int i = 0;i<ss.size();i++) {
+			if(i!=0&&i%10==0)
+				System.out.println();
+			else if(i!=0)
+				System.out.print(" ");
+			System.out.print(ss.get(i));
+		}
+	}
+	public static void Prime(int num1,int num2) {
+		int size =  0;
+		for(int i = 2;;i++) {
+			int sign = 1;
+			for(int j = 2;j<=Math.sqrt(i);j++) {
+				if(i%j==0) {
+					sign = 0;
+					break;
+				}
+			}
+			if(sign==1) {
+				size++;
+				if(size>=num1&&size<=num2)
+					ss.add(i);
+				if(size>num2)
+					break;
+			}
+		}
+	}
+}
+class person implements Comparable<person>{
+	private String name;
+	private int score;
+	String id;
+	public person(String name,String id,int score) {
+		this.score = score;
+		this.name=name;
+		this.id = id;
+	}
+	@Override
+	public int compareTo(person o) {
+		// TODO Auto-generated method stub
+		return Integer.valueOf(this.score).compareTo(o.score);
+	}
+	@Override
+	public String toString() {
+		return name+" "+id;
+	}
+}

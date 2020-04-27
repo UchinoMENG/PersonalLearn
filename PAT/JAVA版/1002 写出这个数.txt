@@ -1,0 +1,20 @@
+import java.util.*;
+import java.lang.Math;
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		String[] sign = {"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};
+		String num = in.next();
+		long sum = 0;
+		for(int i = 0;i<num.length();i++) {
+			sum+=(num.charAt(i)-48);
+		}
+		String yy = String.valueOf(sum);
+		for(int i = 0;i<yy.length();i++) {
+			if(i!=0)
+				System.out.print(" ");
+			System.out.print(sign[yy.charAt(i)-48]);
+		}		
+	}
+}

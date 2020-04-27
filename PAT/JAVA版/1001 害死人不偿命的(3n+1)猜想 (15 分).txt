@@ -1,0 +1,21 @@
+import java.util.Scanner;
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int num = 0;
+		int cnt = 0;
+		Scanner in = new Scanner(System.in);
+		num = in.nextInt();
+		while(num!=1) {
+			cnt++;
+			if(num%2==1) {
+				num = (3*num+1)/2;
+			}
+			else
+				num/=2;
+		}
+		System.out.println(cnt);
+	}
+
+}

@@ -1,0 +1,29 @@
+import java.util.*;
+public class Main {
+	public static boolean Prime(int num) {
+		for(int i = 2;i<=Math.sqrt(num);i++)
+			if(num%i==0)
+				return false;
+		return true;
+	}
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num1 = in.nextInt();
+		int num2 = in.nextInt();
+		int []n = new int[num1];
+		for(int i = 0;i<num1;i++) {
+			n[i] = in.nextInt();
+		}
+		num2%=num1;
+		for(int i = num1-num2;i<num1;i++) {
+			System.out.print(n[i]);
+			System.out.print(" ");
+		}
+		for(int i = 0;i<num1-num2;i++) {
+			if(i!=0)
+				System.out.print(" ");
+			System.out.print(n[i]);
+		}
+	}
+	
+}

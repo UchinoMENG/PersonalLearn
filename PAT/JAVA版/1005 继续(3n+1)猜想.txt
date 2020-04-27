@@ -1,0 +1,52 @@
+import java.util.*;
+public class Main {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num1 = in.nextInt();
+		ArrayList<Integer> ss = new ArrayList<>();
+		int []visit = new int[10000];
+		Arrays.fill(visit, 0);
+		int temp = 0;
+		for(int i = 0;i<num1;i++) {
+			temp = in.nextInt();
+			ss.add(temp);
+		}
+		int n = 0;
+		for(int i = 0;i<ss.size();i++) {
+			n = ss.get(i);
+			while(n!=1) {
+				if(n%2==0) {
+					n/=2;
+				}
+				else
+				{
+					n=n*3+1;
+					n/=2;
+				}
+				visit[n]=1;
+			}
+		}
+		Collections.sort(ss, new comp());
+		int cnt = 0;
+		for(int i = 0;i<ss.size();i++) {
+			if(visit[ss.get(i)]==0) {
+				cnt++;
+				if(cnt!=1) {
+					System.out.print(" ");
+				}
+				System.out.print(ss.get(i));
+			}
+		}
+	}
+	
+}
+class comp implements Comparator<Integer>{
+
+
+	@Override
+	public int compare(Integer o1, Integer o2) {
+		// TODO Auto-generated method stub
+		return o2-o1;
+	}
+	
+}

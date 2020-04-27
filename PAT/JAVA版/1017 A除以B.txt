@@ -1,0 +1,14 @@
+
+import java.math.BigInteger;
+import java.util.*;
+public class Main {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		BigInteger s = in.nextBigInteger();
+		int num1 = in.nextInt();
+		in.close();
+		//System.out.println(s);
+		System.out.println(s.divide(BigInteger.valueOf(num1))+" "+s.mod(BigInteger.valueOf(num1)));
+	}
+	
+}

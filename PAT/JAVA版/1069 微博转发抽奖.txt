@@ -1,0 +1,45 @@
+
+import java.math.BigInteger;
+import java.util.*;
+public class Main{
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		int cha = in.nextInt();
+		int start = in.nextInt();
+		ArrayList<String> result = new ArrayList<>();
+		String temp = "";
+		int hh = 0;
+		boolean sign = false;
+		for(int i = 0;i<num;i++) {
+			temp = in.next();
+			if(i+1==start&&sign==false) {
+				sign = true;
+				result.add(temp);
+			}
+			else if(sign==false){
+				continue;
+			}
+			else {
+				hh++;
+				if(hh==cha) {
+					if(result.contains(temp)) {
+						hh--;
+						continue;
+					}
+					else {
+						result.add(temp);
+						hh = 0;
+					}
+				}
+			}
+		}
+		if(sign==false) {
+			System.out.println("Keep going...");
+		}
+		else
+			for(int i = 0;i<result.size();i++) {
+				System.out.println(result.get(i));
+			}
+	}	
+}

@@ -1,0 +1,18 @@
+import java.util.*;
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		long a = 0,b = 0,c = 0;
+		int icase = 1;
+		while(num-->0) {
+			a = in.nextLong();
+			b = in.nextLong();
+			c=in.nextLong();
+			System.out.printf("Case #%d: %b\n",icase++,a+b>c);
+		}
+	}
+
+}

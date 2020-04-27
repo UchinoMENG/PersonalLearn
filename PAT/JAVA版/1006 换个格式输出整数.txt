@@ -1,0 +1,36 @@
+import java.util.*;
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		StringBuilder str = new StringBuilder();
+		int sign = 3;
+		int bai = 100;
+		while(sign-->0) {
+			if(num/bai!=0) {
+				if(bai==100) {
+					for(int i = 0;i<num/bai;i++) {
+						str.append('B');
+					}
+				}
+				else if(bai==10) {
+					for(int i = 0;i<num/bai;i++) {
+						str.append('S');
+					}
+				}
+				else
+					for(int i = 1;i<=num/bai;i++) {
+						str.append(i);
+					}
+			}
+			num%=bai;
+			bai/=10;
+			if(bai==0)
+				break;
+		}
+		System.out.println(str);
+	}
+
+}
