@@ -36,7 +36,7 @@ main:20
 
 #### 3.看源码
 
-![image-20200409204611521](C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20200409204611521.png)
+![image-20200409204611521](https://i.loli.net/2020/06/22/KiU1mMhbaDjHITv.png)
 
 > 大概意思就是这个类是一个线程局部变量。在每一个线程中，这些变量不同于其他线程的，每一个线程获取他们自己的，独立变量的副本
 
@@ -131,7 +131,7 @@ ThreadLocalMap(ThreadLocal<?> firstKey, Object firstValue) {
 
 原理图就是这样
 
-![ThreadLocal原理](C:\Users\lenovo\Desktop\孟令强\ty图片\ThreadLocal原理.jpg)
+![ThreadLocal原理](https://i.loli.net/2020/06/22/yWUmp6MKaBje2ot.jpg)
 
 2.get方法
 
