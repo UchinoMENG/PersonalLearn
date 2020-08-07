@@ -34,3 +34,67 @@ Mybatis中的二级缓存是mapper级别的缓存，值得注意的是，不同�
 >3. sqlSession2去查询用户id为1的用户信息，去缓存中找是否存在数据，如果存在直接从缓存中取出数据。
 
 如果是从二级缓存拿的数据，数据的地址是不一样的，因为二级缓存是存的序列化的数据，而不是像一级缓存一样存的是物理地址。
+
+### 延迟加载
+
+##### 延迟加载：（应用于一对多，多对多，即关联的对象为“多”时）
+
+在真正使用数据时才发起查询，不用的时候不查询，按需加载（懒加载）。
+
+##### 立即加载：（应用于多对一，一对一，即关联的对象为“一”时）
+
+不管用不用，在调用方法的时候就立即执行，马上发起查询。
+
+[https://blog.csdn.net/eson_15/article/details/51669608](Mybatis延迟加载好的博客)
+
+
+
+### JDBC编程有哪些不足之处，MyBatis是如何解决这些问题的？
+
+1、数据库链接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库连接池可解决此问题。
+
+解决：在mybatis-config.xml中配置数据链接池，使用连接池管理数据库连接。
+
+2、Sql语句写在代码中造成代码不易维护，实际应用sql变化的可能较大，sql变动需要改变java代码。
+
+解决：将Sql语句配置在XXXXmapper.xml文件中与java代码分离。
+
+3、向sql语句传参数麻烦，因为sql语句的where条件不一定，可能多也可能少，占位符需要和参数一一对应。
+
+解决： Mybatis自动将java对象映射至sql语句。
+
+4、对结果集解析麻烦，sql变化导致解析代码变化，且解析前需要遍历，如果能将数据库记录封装成pojo对象解析比较方便。
+
+解决：Mybatis自动将sql执行结果映射至java对象。
+
+### Mybatis是否支持延迟加载？如果支持，他的实现原理是什么？
+
+>Mybatis仅支持association关联对象和collection关联集合对象的延迟加载，association指的就是一对一，collection指的就是一对多查询。在Mybatis配置文件中，可以配置是否启用延迟加载lazyLoadingEnabled=true|false。
+>
+>它的实现原理是，使用CGLIB创建目标对象的代理对象，当调用目标方法时，进入拦截器方法，比如调用a.getB().getName(),拦截器invoke()方法发现a.getB()是null值，那么就会单独发送实现保存好的查询关联对象B对象的sql，把B查询上来，然后调用a,setB(b),于是a对象的b属性就有值了，接着完成a.getB().getName()方法的调用。这就是延迟加载的基本原理。
+
+### #{}和${}的区别
+
+- #{}是占位符，预编译处理；${}是拼接符，字符串替换，没有预编译处理。
+- Mybatis在处理#{}时，#{}传入参数是以字符串传入，会将SQL中的#{}替换为?号，调用PreparedStatement的set方法来赋值。
+- 在变量替换的时候，#{}对应的变量自动加上单引号' ';而${}对应的变量不会加上单引号
+- #{}可以有效的防止SQL注入，提高系统安全性；${}不能防止SQL注入
+
+### 模糊查询like语句该怎么写
+
+（1）’%${question}%’ 可能引起SQL注入，不推荐
+
+（2）"%"#{question}"%" 注意：因为#{…}解析成sql语句时候，会在变量外侧自动加单引号’ '，所以这里 % 需要使用双引号" "，不能使用单引号 ’ '，不然会查不到任何结果。
+
+（3）CONCAT(’%’,#{question},’%’) 使用CONCAT()函数，推荐
+
+（4）使用bind标签
+
+```xml
+<select id="listUserLikeUsername" resultType="com.jourwon.pojo.User">
+　　<bind name="pattern" value="'%' + username + '%'" />
+　　select id,sex,age,username,password from person where username LIKE #{pattern}
+</select>
+
+```
+
