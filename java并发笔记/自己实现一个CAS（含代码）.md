@@ -19,14 +19,16 @@
    public class CASDemo {
        //声明一个静态变量
        private static  int count = 0;
+       //自增
        public static void increment()throws Exception{
            TimeUnit.MILLISECONDS.sleep(5);
            count++;
        }
-   
+   	
        public static void main(String[] args) {
            int ThreadSize = 100;
            int cnt = 10;
+           //屏障
            CountDownLatch countDownLatch = new CountDownLatch(ThreadSize);
            long start = System.currentTimeMillis();
            for(int i = 0;i<ThreadSize;i++){
